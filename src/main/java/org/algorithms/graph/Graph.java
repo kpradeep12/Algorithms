@@ -1,27 +1,31 @@
 package org.algorithms.graph;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.stream.IntStream;
 
 public class Graph {
     
-    LinkedList[] list = null;
+    ArrayList<ArrayList<Integer>> list = new ArrayList<>();
     Integer size;
     public Graph(Integer size) {
-        list = new LinkedList[size];
         this.size = size;
-        for(int i=0; i<size; i++) list[i] = new LinkedList<Integer>();
+        IntStream.range(0, size)
+            .forEach(n -> list.add(n, new ArrayList<>()));
     }
 
     public void addNode(Integer source, Integer destination) {
-        list[source].add(destination);
-        list[destination].add(source);
+        list.get(source).add(destination);
+        list.get(destination).add(source);
     }
 
     public void print() {
-        for(int i=0; i<size; i++) {
-            System.out.print(i + " -> ");
-            for(int j=0; j<list[i].size(); j++) System.out.println(list[i].get(j) + ", ");
-        }
+        IntStream.range(0, size)
+            .forEach(index -> {
+                System.out.print(index + " -> ");
+                list.get(index).forEach(vertex -> System.out.print(vertex + ", "));
+                System.out.println();
+            });
     }
 
     public static void main(String[] args) {
