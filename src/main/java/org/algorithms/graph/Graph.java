@@ -31,10 +31,15 @@ public class Graph {
     }
 
     public static void main(String[] args) {
-        Graph graph = new Graph(4, true);
+        Graph graph = new Graph(8, false);
         graph.addNode(0, 1);
-        graph.addNode(0, 2);
+        graph.addNode(1, 4);
+        graph.addNode(1, 5);
+        graph.addNode(4, 2);
+        graph.addNode(5, 2);
         graph.addNode(2, 3);
+        graph.addNode(3, 6);
+        graph.addNode(5, 6);
         graph.print();
     }
 
