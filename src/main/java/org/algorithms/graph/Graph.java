@@ -1,6 +1,9 @@
 package org.algorithms.graph;
 
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Stack;
 import java.util.stream.IntStream;
 
 public class Graph {
@@ -30,6 +33,44 @@ public class Graph {
             });
     }
 
+    public void bfs(Integer root) {
+        Deque<Integer> queue = new LinkedList<>();
+        boolean[] tracker = new boolean[list.size()];
+        tracker[root] = true;
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            Integer vertex = queue.poll();
+            System.out.println("processing " + vertex);
+            list.get(vertex).forEach(node -> {
+                if(!tracker[node]) {
+                    queue.offer(node);
+                    tracker[node] = true;
+                }
+                
+            });
+            
+        }
+    }
+
+    public void dfs(Integer root) {
+        Stack<Integer> stack = new Stack<>();
+        boolean[] tracker = new boolean[list.size()];
+        stack.push(root);
+        tracker[root] = true;
+
+        while(!stack.isEmpty()) {
+            Integer node = stack.pop();
+            System.out.println("procesing :" + node);
+            list.get(node).forEach(n -> {
+                if(!tracker[n]) {
+                    stack.push(n);
+                    tracker[n] = true;
+                }
+            });
+        }
+
+    }
+
     public static void main(String[] args) {
         Graph graph = new Graph(8, false);
         graph.addNode(0, 1);
@@ -41,6 +82,7 @@ public class Graph {
         graph.addNode(3, 6);
         graph.addNode(5, 6);
         graph.print();
+        graph.dfs(0);
     }
 
 }
