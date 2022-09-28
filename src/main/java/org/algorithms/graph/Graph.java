@@ -71,6 +71,28 @@ public class Graph {
 
     }
 
+    //Problem: 1 -> Route between nodes
+    public boolean isConnected(Integer source, Integer destination) {
+        if(source == destination) return true;
+        Deque<Integer> queue = new LinkedList<>();
+        boolean[] tracker = new boolean[list.size()];
+        queue.offer(source);
+        tracker[source] = true;
+        while(!queue.isEmpty()) {
+            Integer vertex = queue.poll();
+            for(Integer node: list.get(vertex)) {
+                if(!tracker[node]) {
+                    if(destination == node) {
+                        return true;
+                    }else {
+                        queue.offer(node);
+                        tracker[node] = true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
     public static void main(String[] args) {
         Graph graph = new Graph(8, false);
         graph.addNode(0, 1);
@@ -82,7 +104,8 @@ public class Graph {
         graph.addNode(3, 6);
         graph.addNode(5, 6);
         graph.print();
-        graph.dfs(0);
+        //graph.dfs(0);
+        System.out.println(graph.isConnected(2, 3));
     }
 
 }
