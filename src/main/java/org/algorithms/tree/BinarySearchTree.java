@@ -1,5 +1,11 @@
 package org.algorithms.tree;
 
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
+
+import javax.sound.sampled.SourceDataLine;
+
 public class BinarySearchTree {
     Node root;
     class Node {
@@ -102,6 +108,35 @@ public class BinarySearchTree {
         node.right = createMinimalBST(array, mid + 1, end);
         return node;
     }
+    public void levelOrderTraversal() {
+        Deque<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            Node node = queue.poll();
+            System.out.print(node.value + ", ");
+            if(node.left != null) queue.add(node.left);
+            if(node.right != null) queue.add(node.right);
+        }
+    }
+    //Problem 4.3 create lists of depth on a 'Binary tree'
+    public void createListsOfDepth() {
+        ArrayList<LinkedList<Node>> result = new ArrayList<>();
+        LinkedList<Node> current = new LinkedList<>();
+        current.add(root);
+        while(current.size() > 0) {
+            result.add(current);
+            LinkedList<Node> temp = current;
+            current = new LinkedList<>();
+            for(Node node: temp) {
+                if(node.left != null) current.add(node.left);
+                if(node.right != null) current.add(node.right);
+            }
+        }
+        for(LinkedList<Node> list : result) {
+            System.out.println();
+            list.forEach(n -> System.out.print(n.value + " "));
+        }
+    }
     public static void main(String[] args) {
         System.out.println("BST");
         BinarySearchTree bst = new BinarySearchTree();
@@ -118,6 +153,6 @@ public class BinarySearchTree {
         //bst.deleteNode(3);
         //bst.inOrder();
         bst.createMinimalBST(new int[] {2, 4, 8, 10, 15, 16, 19});
-        bst.inOrder();
+        bst.createListsOfDepth();
     }
 }
