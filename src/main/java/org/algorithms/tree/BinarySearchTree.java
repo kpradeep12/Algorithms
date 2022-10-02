@@ -155,4 +155,6 @@ public class BinarySearchTree {
         bst.createMinimalBST(new int[] {2, 4, 8, 10, 15, 16, 19});
         bst.createListsOfDepth();
     }
+
+    // try this problem: print Binary tree level wise
 }
