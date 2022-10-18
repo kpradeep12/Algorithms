@@ -1,6 +1,7 @@
 package org.algorithms.tree;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -8,12 +9,11 @@ import javax.sound.sampled.SourceDataLine;
 
 public class BinarySearchTree {
     Node root;
-    class Node {
+    static class Node {
         int value;
         Node right, left;
         Node(int value) {this.value = value;}
     }
-
     public void insert(int data) {
         if(root == null) root = new Node(data);
         else insertNode(root, data);
@@ -58,7 +58,7 @@ public class BinarySearchTree {
         if(root.left == null) return root;
         else return minimumElement(root.left);
     }
-
+    
     public void inOrder() {
         System.out.print("InOrder -> ");
         inOrder(root);
@@ -95,7 +95,7 @@ public class BinarySearchTree {
             System.out.print(root.value+ " ");
         }
     }
-
+    
     public void createMinimalBST(int[] array) {
         this.root = this.createMinimalBST(array, 0, array.length - 1);
     }
@@ -137,23 +137,91 @@ public class BinarySearchTree {
             list.forEach(n -> System.out.print(n.value + " "));
         }
     }
+    //Problem 4.4 Check if BT is balanced by height not more than 1 level
+    public boolean isTreeBalanced() {
+        return checkBalance(root) != Integer.MIN_VALUE;
+    }
+    private int checkBalance(Node node) {
+        if(node == null) return -1;
+    
+        int leftHeight = checkBalance(node.left);
+        if(leftHeight == Integer.MIN_VALUE) return Integer.MIN_VALUE;
+    
+        int rightHeight = checkBalance(node.right);
+        if(rightHeight == Integer.MIN_VALUE) return Integer.MIN_VALUE;
+    
+        int heightDiff = leftHeight - rightHeight;
+        if(Math.abs(heightDiff) > 1) 
+            return Integer.MIN_VALUE;
+        else
+            return Math.max(leftHeight, rightHeight) + 1;
+    }
+    /*int[] array;
+    int size;
+    public boolean isValidBST() {
+        array = new int[size];
+        index = 0;
+        checkBST(root, array);
+        System.out.println(Arrays.toString(array));
+        for(int i=1; i<array.length; i++) {
+            if(array[i] <= array[i-1]) return false;
+        }
+        return true;
+    }
+    int index = 0;
+    private void checkBST(Node node, int[] array) {
+        if(node == null) return;
+        checkBST(node.left, array);
+        array[index++] = node.value;
+        checkBST(node.right, array);
+    }*/
+    //Problem 4.5 check if a BT is BST
+    public boolean isValidBST() {
+        return checkBST(root);
+    }
+    Integer previousValue;
+    private boolean checkBST(Node node) {
+        if(node == null) return true;
+        if(!checkBST(node.left)) return false;
+    
+        if(previousValue != null && previousValue >= node.value)
+            return false;
+    
+        previousValue = node.value;
+        if(!checkBST(node.right)) return false;
+        
+        return true;
+    }
     public static void main(String[] args) {
         System.out.println("BST");
         BinarySearchTree bst = new BinarySearchTree();
-        //bst.insert(5);
-        //bst.insert(3);
-        //bst.insert(4);
-        //bst.insert(1);
-        //bst.insert(8);
-        //bst.insert(6);
-        //bst.inOrder();
+        /*bst.insert(5);
+        bst.insert(3);
+        bst.insert(4);
+        bst.insert(1);
+        bst.insert(8);
+        bst.insert(6);
+        bst.inOrder();*/
         //bst.preOrder();
         //bst.postOrder();
         //System.out.println(bst.minimumElement());
         //bst.deleteNode(3);
         //bst.inOrder();
-        bst.createMinimalBST(new int[] {2, 4, 8, 10, 15, 16, 19});
-        bst.createListsOfDepth();
+        //bst.createMinimalBST(new int[] {2, 4, 8, 10, 15, 16, 19});
+        //bst.inOrder();
+        //bst.createListsOfDepth();
+        //bst.size = 6;
+        bst.root = new BinarySearchTree.Node(10);
+        bst.root.left=new BinarySearchTree.Node(4);
+        bst.root.right=new BinarySearchTree.Node(12);
+        bst.root.right.right=new BinarySearchTree.Node(16);
+        bst.root.left.left = new BinarySearchTree.Node(2);
+        bst.root.left.left.left = new BinarySearchTree.Node(1);
+        bst.root.left.left.left.left = new BinarySearchTree.Node(0);
+        bst.inOrder();
+        System.out.println(bst.isValidBST());
+
+//        System.out.println(bst.isValidBST());
     }
 
     // try this problem: print Binary tree level wise
