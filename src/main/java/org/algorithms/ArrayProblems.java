@@ -53,10 +53,25 @@ public class ArrayProblems {
         for(int i=0;i<pa.length;i++) result[i] = pa[i] * sa[i];
         return result;
     }
+    public static int subSumOfArray(int[] arr) {
+        int maxSum = 0;
+        for(int i=0; i<arr.length; i++) {
+            for(int j=i; j<arr.length; j++) {
+                int subSum = 0;
+                for(int k=i; k<j; k++) {
+                    subSum = subSum + arr[k];
+                }
+                if(subSum > maxSum) maxSum = subSum;
+            }
+        }
+        return maxSum;
+    }
     public static void main(String[] args) {
         //System.out.println(Arrays.toString(ArrayProblems.twoSumsWithMap(new int[]{11,8,3,2,15,7,10}, 9)));
         //System.out.println(bestTimeToBuy(new int[]{7,6,4,3,1}));
         //System.out.println(containsDuplicate(new int[]{1,2,3,4,3}));
-        System.out.println(Arrays.toString(productExceptSelf(new int[]{1,2,3,4})));
+        //System.out.println(Arrays.toString(productExceptSelf(new int[]{1,2,3,4})));
+        System.out.println(subSumOfArray(new int[]{-4, 5, 7, -6, 10, -15, 3}));
+        System.out.println(subSumOfArray(new int[]{-3, 2, -1, 4, -2}));
     }
 }
