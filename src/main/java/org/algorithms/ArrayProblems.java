@@ -1,8 +1,12 @@
 package org.algorithms;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ArrayProblems {
     public static int[] twoSumsWithLoops(int[] input, int total) {
@@ -66,12 +70,43 @@ public class ArrayProblems {
         }
         return maxSum;
     }
+    public static int maxVolumnContainer(int[] arr) {
+        int maxVolume = Integer.MIN_VALUE;
+        int first = 0, end = arr.length -1;
+        while(first < end) {
+            int min = Math.min(arr[first], arr[end]);
+            int volume = min * (end-first);
+            maxVolume = Math.max(volume, maxVolume);
+            if(arr[first] < arr[end]) first ++; else end--;
+        }
+        return maxVolume;
+    }
+    public static List<Integer[]> threeSum(int[] arr, int target) {
+        List<Integer[]> list = new ArrayList<>();
+        for(int i=0; i<arr.length-2; i++) {
+            int currentTarget = target - arr[i];
+            Set<Integer> set = new HashSet<>();
+            for(int j=i+1; j<arr.length; j++) {
+                if(set.contains(currentTarget-arr[j])) {
+                    list.add(new Integer[] {arr[i], arr[j], currentTarget-arr[j]});
+                }else
+                set.add(arr[j]);
+            }
+        }
+        return list;
+    }
     public static void main(String[] args) {
         //System.out.println(Arrays.toString(ArrayProblems.twoSumsWithMap(new int[]{11,8,3,2,15,7,10}, 9)));
         //System.out.println(bestTimeToBuy(new int[]{7,6,4,3,1}));
         //System.out.println(containsDuplicate(new int[]{1,2,3,4,3}));
         //System.out.println(Arrays.toString(productExceptSelf(new int[]{1,2,3,4})));
-        System.out.println(subSumOfArray(new int[]{-4, 5, 7, -6, 10, -15, 3}));
-        System.out.println(subSumOfArray(new int[]{-3, 2, -1, 4, -2}));
+        //System.out.println(subSumOfArray(new int[]{-4, 5, 7, -6, 10, -15, 3}));
+        //System.out.println(subSumOfArray(new int[]{-3, 2, -1, 4, -2}));
+        //System.out.println(maxVolumnContainer(new int[] {1,8,6,2,5,4,8,3,7}));
+
+        List<Integer[]> list = threeSum(new int[]{-1,0,1,2,-1,-4}, 0);
+        for(Integer[] item: list) {
+            System.out.println(Arrays.toString(item));
+        }
     }
 }
