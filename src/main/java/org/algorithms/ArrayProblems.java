@@ -95,6 +95,27 @@ public class ArrayProblems {
         }
         return list;
     }
+    public static int minimumInRotatedArray(int[] arr, int l, int h) {
+        if(h<l) return arr[0];
+        if(h==l) return arr[l];
+        int mid = l + (h-l)/2;
+        if(arr[mid]> arr[mid+1]) return arr[mid+1];
+        if(arr[mid] < arr[mid-1]) return arr[mid];
+        if(arr[h] < arr[mid]) return minimumInRotatedArray(arr, mid+1, h);
+        else return minimumInRotatedArray(arr, l, mid-1);
+    }
+    public static int maxProdSubArray(int[] arr) {
+        int max = arr[0];
+        int min = arr[0];
+        int result = max;
+        for(int i=1; i<arr.length; i++) {
+            int temp = Math.max(arr[i], Math.max(max * arr[i], min * arr[i]));
+            min = Math.min(arr[i], Math.min(max * arr[i], min * arr[i]));
+            max = temp;
+            result = Math.max(max, result);
+        }
+        return result;
+    }
     public static void main(String[] args) {
         //System.out.println(Arrays.toString(ArrayProblems.twoSumsWithMap(new int[]{11,8,3,2,15,7,10}, 9)));
         //System.out.println(bestTimeToBuy(new int[]{7,6,4,3,1}));
@@ -104,9 +125,13 @@ public class ArrayProblems {
         //System.out.println(subSumOfArray(new int[]{-3, 2, -1, 4, -2}));
         //System.out.println(maxVolumnContainer(new int[] {1,8,6,2,5,4,8,3,7}));
 
-        List<Integer[]> list = threeSum(new int[]{-1,0,1,2,-1,-4}, 0);
+        /*List<Integer[]> list = threeSum(new int[]{-1,0,1,2,-1,-4}, 0);
         for(Integer[] item: list) {
             System.out.println(Arrays.toString(item));
-        }
+        }*/
+        //System.out.println(minimumInRotatedArray(new int[]{7,8,1,2,3,4,5,6}, 0, 7));
+        //System.out.println(maxProdSubArray(new int[]{1,-2, -3, 0, 7, -8, -2}));
+        int x = -12;   
+        System.out.println("x<<1 = " + (x << 1)); 
     }
 }

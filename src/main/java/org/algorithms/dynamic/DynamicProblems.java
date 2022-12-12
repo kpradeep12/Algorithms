@@ -111,9 +111,63 @@ public class DynamicProblems {
         if(a==1) return b;
         return multiply(a-1, b) + b;
     }
-
+    public static int countWaysToStair(int num) {
+        int[] nums = new int[num+1];
+        Arrays.fill(nums, -1);
+        return countWaysToStair(num, nums);
+    }
+    public static int countWaysToStair(int num, int[] nums) {
+        if(num == 0) return 1;
+        else if(num < 0) return 0;
+        else if(nums[num] != -1) return nums[num];
+        else { nums[num] =countWaysToStair(num-1, nums) + countWaysToStair(num-2, nums) + countWaysToStair(num-3, nums);
+            return nums[num];
+        }
+    }
+    public static int coinChange(int[] coins, int amount) {
+        int[] dp = new int[amount+1];
+        dp[0]=0;
+        for(int currAmt =1; currAmt<=amount; currAmt++) {
+            int temp = Integer.MAX_VALUE;
+            for(int j=0; j<coins.length; j++){
+                int coin = coins[j];
+                if(currAmt-coin >= 0) {
+                    temp = Math.min(temp, dp[currAmt-coin]+1);
+                }
+            }
+            dp[currAmt] = temp;
+        }
+        if(dp[amount] == Integer.MAX_VALUE) return -1;
+        else return dp[amount];
+    }
+    public static int longestSequence(int[] data, int startIndex, int level, int[] store) {
+        System.out.printf("%s->%s with index %d\n","    ".repeat(level),Arrays.toString(data), startIndex);
+        if(startIndex == data.length-1) return 1;
+        if(store[startIndex] != -1) return store[startIndex];
+        int max = 1;
+        for (int i = startIndex+1; i < data.length; i++) {
+            if(data[startIndex] < data[i])   {
+                System.out.printf("%s-> %d < %d\n","    ".repeat(level+1),data[startIndex], data[i]);
+                int result = 1 + longestSequence(data, i, level+1, store);
+                store[startIndex] = result;
+                if(result > max) max = result;
+            }
+        }
+        return max;
+    }
+    public static int longestSequence(int[] data) {
+        int max = 0;
+        int[] store = new int[data.length];
+        Arrays.fill(store, -1);
+        for (int i = 0; i < data.length; i++) {
+            System.out.printf("index %d\n",i);
+            int length = longestSequence(data, i, 0, store);
+            if(length > max) max = length;
+        }
+        return max;
+    }
     public static void main(String[] args) {
-        
+        System.out.println(longestSequence(new int[]{10,9,2,5,3,7,101,18}));
         /*int n = 4;
         int[] mem = new int[n+1];
         Arrays.fill(mem, -1);
@@ -133,7 +187,9 @@ public class DynamicProblems {
             }
             System.out.println();
         }*/
-        System.out.println(multiply(3, 2));
-
+       //System.out.println(multiply(3, 2));
+       //System.out.println(countWaysToStair(3));
+       //System.out.println(coinChange(new int[]{1,2,3}, 1));
+        
     }
 }
