@@ -1,6 +1,11 @@
 package org.algorithms;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Stack;
 
 public class StringProblems {
     public static int longestSubstring(String input) {
@@ -36,10 +41,90 @@ public class StringProblems {
                 left++;
             }
         }
-        return -1;
+        return chars.length - left;
+    }
+    public static String minimumWindow(String s, String t) {
+        int[] count = new int[128];
+        for(char c: t.toCharArray()) count[c]++;
+        System.out.println(Arrays.toString(count));
+        /*for(int l=0,r=0; r<s.length(); r++) {
+
+
+        }*/
+        return "";
+    }
+    public static boolean isValidAnagram(String s, String t) {
+        int[] chars = new int[126];
+        if(s.length() != t.length()) return false;
+        for(int i=0; i<s.length(); i++) {
+            chars[s.charAt(i)] ++;
+            chars[t.charAt(i)] --;
+        }
+        for(int i=0; i<chars.length; i++) {
+            if(chars[i] != 0) return false;
+        }
+        return true;
+    }
+    public static List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> result = new LinkedList<>();
+        Map<String, List<String>> map = new HashMap<>();
+        for(String str: strs) {
+            char[] chars = str.toCharArray();
+            Arrays.sort(chars);
+            String key = new String(chars);
+            if(map.containsKey(key)) {
+                map.get(key).add(str);
+            }else{
+                List<String> list = new LinkedList<>(); list.add(str);
+                map.put(key, list);
+            }
+        }
+        result.addAll(map.values());
+        return result;
+    }
+    public static boolean isValidParentheses(String str) {
+        Map<Character, Character> map = new HashMap<>();
+        map.put('(', ')'); map.put('{', '}'); map.put('[', ']'); 
+        Stack<Character> stack = new Stack<>();
+        for(char c: str.toCharArray()) {
+            if(map.containsKey(c)) {
+                stack.push(c);
+            }else if(map.containsValue(c)) {
+                if(!stack.isEmpty() && map.get(stack.peek()) == c){
+                    stack.pop();
+                }else return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+    public static boolean isPalindrome(String str) {
+        StringBuilder sb = new StringBuilder();
+        for(char c: str.toLowerCase().toCharArray()) {
+            if(Character.isLetterOrDigit(c)) sb.append(c);
+        }
+        System.out.println(sb.toString());
+        for(int i=0; i<sb.length()/2; i++) {
+            int j = sb.length() - i - 1;
+            if(sb.charAt(i) != sb.charAt(j)) return false;
+        }
+        return true;
     }
     public static void main(String[] args) {
         //System.out.println(longestSubstring("abcaefgh"));
-        characterReplacement("AABABBA", 2);
+        //System.out.println(characterReplacement("ABABAFGH", 1));
+        //characterReplacement("AABABBA", 1);
+        //System.out.println(minimumWindow("ADOBECODEBANC", "ABC"));
+        //System.out.println(isValidAnagram("raw", "car"));
+
+        /*List<List<String>> result = groupAnagrams(new String[]{"eat","tea","tan","ate","nat","bat"});
+        for(List<String> list: result) {
+            for(String s: list) {
+                System.out.printf("%s ", s);
+            }
+            System.out.println();
+        }*/
+
+        //System.out.println(isValidParentheses("(())"));
+        System.out.println(isPalindrome(" "));
     }
 }
