@@ -8,6 +8,48 @@ import java.util.stream.IntStream;
 
 public class Graph {
     
+    ArrayList<LinkedList<Integer>> list = new ArrayList<>();
+    boolean isDirectedGraph = false;
+
+    public Graph(int size, boolean isDirectedGraph) {
+        IntStream.range(0, size).forEach(n -> list.add(n, new LinkedList<>()));
+        this.isDirectedGraph = isDirectedGraph;
+    }
+
+    void addNode(int source, int destination) {
+        list.get(source).add(destination);
+        if(!isDirectedGraph) list.get(destination).add(source);
+    }
+
+    void print() {
+        for(int i=0; i<list.size(); i++) {
+            System.out.print(i + " -> ");
+            for(Integer num: list.get(i)) {
+                System.out.print(num + " , ");
+            }
+            System.out.println();
+        }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) return false;
+        final Graph graph = (Graph) obj;
+        if(this.list.size() != graph.list.size()) return false;
+        for(int i=0; i<list.size(); i++) {
+            if(!list.get(i).containsAll(graph.list.get(i))) return false;
+        }
+        return true;
+    }
+    public static void main(String[] args) {
+        Graph graph = new Graph(10, false);
+        graph.addNode(0, 1); graph.addNode(0, 2); graph.addNode(0, 3);
+        graph.addNode(1, 4);graph.addNode(2, 5);graph.addNode(2, 6);graph.addNode(3, 7);
+        graph.addNode(4, 8);graph.addNode(5, 9);
+        graph.print();
+    }
+
+    /*
     ArrayList<ArrayList<Integer>> list = new ArrayList<>();
     Integer size;
     Boolean isDirected;
@@ -106,7 +148,7 @@ public class Graph {
         graph.print();
         //graph.dfs(0);
         System.out.println(graph.isConnected(2, 3));
-    }
+    }*/
 
 }
  

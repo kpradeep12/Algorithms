@@ -68,6 +68,18 @@ public class BinaryTree {
         }
         return result;
     }
+    
+    public static boolean isSubTree(Node root, Node subRoot) {
+        if(root == null) return false;
+        if(isSubTreeHelper(root, subRoot)) return true;
+        return isSubTree(root.left, subRoot) || isSubTree(root.right, subRoot);
+    }
+    public static boolean isSubTreeHelper(Node root, Node subRoot) {
+        if(root == null && subRoot == null) return true;
+        if(root == null || subRoot == null) return false;
+        if(root.data != subRoot.data) return false;
+        return (isSubTreeHelper(root.left, subRoot.left) && isSubTreeHelper(root.right, subRoot.right));
+    }
     public static void main(String[] args) {
         //Node node = new Node(3, new Node(9), 
         //new Node(20, new Node(15), new Node(7)));
@@ -83,12 +95,14 @@ public class BinaryTree {
         System.out.println();
         preOrder(n);*/
 
-        Node n = new Node(3, new Node(9), new Node(20, new Node(15), new Node(7)));
+        /*Node n = new Node(3, new Node(9), new Node(20, new Node(15), new Node(7)));
         ArrayList<ArrayList<Integer>> result = levelOrder(n);
         for(ArrayList<Integer> list: result) {
             list.forEach(num -> System.out.printf("%d ", num));
             System.out.println();
-        }
+        }*/
+        System.out.println(isSubTree(new Node(3, new Node(4, new Node(1), new Node(2)), new Node(5)),
+        new Node(4, new Node(1), new Node(2))));
 
     }
 }

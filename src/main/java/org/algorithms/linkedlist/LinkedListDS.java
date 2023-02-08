@@ -1,13 +1,18 @@
 package org.algorithms.linkedlist;
 
-public class LinkedList {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class LinkedListDS {
     public static class Node {
-        int data; Node next;
+        public int data; 
+        public Node next;
         public Node(int data) {
             this.data = data;
         }
     }
-    Node root;
+    public Node root;
     public void insert(int data){
         Node node = new Node(data);
         if(root == null) root = node;
@@ -27,5 +32,15 @@ public class LinkedList {
             temp = temp.next;
         }
         temp.next = node;
+    }
+    @Override
+    public String toString() {
+        List<Integer> list = new ArrayList<>();
+        Node temp = root;
+        while(temp != null) {
+            list.add(temp.data);
+            temp = temp.next;
+        }
+        return Arrays.toString(list.toArray());
     }
 }
