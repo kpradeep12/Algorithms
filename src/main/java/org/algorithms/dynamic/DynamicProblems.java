@@ -6,6 +6,16 @@ import java.util.stream.IntStream;
 
 public class DynamicProblems {
     
+    public static int fibonacciOf(int n) {
+        if(n == 0) return 0;
+        int n1 = 1, n2 = 0, next = 0;
+        for(int i=2; i<n; i++) {
+            next = n1 + n2;
+            n2 = n1;
+            n1 = next;
+        }
+        return n1 + n2;
+    }
     public static class Point { 
         int row, col; 
         Point (int row, int col) {this.row = row; this.col = col;}

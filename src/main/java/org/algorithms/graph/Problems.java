@@ -3,10 +3,11 @@ package org.algorithms.graph;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 public class Problems {
     /*
-     * Traverse given graph using Breadth First Search approach
+     * Traverse given graph using Breadth First Search
      * Input: Graph and root node
      * Output: List of nodes traversed
      */
@@ -30,4 +31,53 @@ public class Problems {
         }
         return result;
     }
+
+    /*
+     * Traverse given graph using Depth First Search
+     * Input: Graph and root node
+     * Output: List of nodes traversed
+     */
+    public static List<Integer> depthFirstSearchTraversal(Graph graph, int root) {
+        Stack<Integer> stack = new Stack<>();
+        List<Integer> result = new LinkedList<>();
+        boolean[] visited = new boolean[graph.list.size()];
+        stack.add(root);
+        while(!stack.isEmpty()) {
+            Integer node = stack.pop();
+            if(!visited[node]) {
+                visited[node] = true;
+                result.add(node);
+                List<Integer> list = graph.list.get(node);
+                for(Integer num: list) {
+                    if(!visited[num]) {
+                        stack.push(num);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    /*
+     * Check if given start and end nodes are connected in the given directed graph
+     * Input: Graph, start and end node
+     * Output: boolean if connected, else false
+     */
+    public static boolean isRouteAvailable(Graph graph, int start, int end) {
+        Queue<Integer> queue = new LinkedList<>();
+        boolean[] visited = new boolean[graph.list.size()];
+        queue.add(start);
+        visited[start] = true;
+        while(!queue.isEmpty()) {
+            for(Integer num: graph.list.get(queue.poll())) {
+                if(!visited[num]) {
+                    if(num == end) return true;
+                    visited[num] = true;
+                    queue.offer(num);
+                }
+            }
+        }
+        return false;
+    }
+
 }
