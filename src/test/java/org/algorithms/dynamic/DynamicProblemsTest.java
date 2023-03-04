@@ -1,8 +1,9 @@
 package org.algorithms.dynamic;
 
-import static org.junit.Assert.assertEquals;
-import static org.algorithms.dynamic.DynamicProblems.*;
-import org.junit.Test;
+import static org.algorithms.dynamic.DynamicProblems.fibonacciOf;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class DynamicProblemsTest {
     @Test

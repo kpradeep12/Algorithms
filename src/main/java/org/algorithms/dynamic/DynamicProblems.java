@@ -16,6 +16,12 @@ public class DynamicProblems {
         }
         return n1 + n2;
     }
+
+    /*
+     * Triple step
+     */
+    public static void tripleStep() {}
+
     public static class Point { 
         int row, col; 
         Point (int row, int col) {this.row = row; this.col = col;}
