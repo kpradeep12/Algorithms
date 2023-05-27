@@ -18,9 +18,33 @@ public class DynamicProblems {
     }
 
     /*
-     * Triple step
+     * CCI:8.1 - Triple step
+     * A child is running up a staircase with n steps and can hop either 1 step, 2 steps or 3 steps at a 
+     * time. Implement a method to count how many possible ways the child can run up the stairs.
      */
-    public static void tripleStep() {}
+    public static int waysToClimbStairs(int n) {
+        if(n < 0) return 0;
+        else if(n == 0) return 1;
+        else return waysToClimbStairs(n-1) + waysToClimbStairs(n-2) + waysToClimbStairs(n-3);
+    }
+
+
+    /*public static int waysToClimbStairs(int n) {
+        int[] mem = new int[n+1];
+        Arrays.fill(mem, -1);
+        return waysToClimbStairs(n, mem);
+    }
+
+    private static int waysToClimbStairs(int n, int[] mem) {
+        if(n < 0) return 0;
+        else if(n == 0) return 1;
+        else if(mem[n] > -1) return mem[n];
+        else { 
+            mem[n] = waysToClimbStairs(n-1, mem) + waysToClimbStairs(n-2, mem) 
+            + waysToClimbStairs(n-3, mem);
+            return mem[n];
+        }
+    }*/
 
     public static class Point { 
         int row, col; 
@@ -30,16 +54,6 @@ public class DynamicProblems {
             return "Point [col=" + col + ", row=" + row + "]";
         }
         
-    }
-    public static int waysToClimbStairs(int n, int[] mem) {
-        if(n == 0) return 1;
-        else if (n < 0) return 0;
-        else if(mem[n] > -1) return mem[n];
-        else {
-            mem[n] = waysToClimbStairs(n-3, mem) + waysToClimbStairs(n-2, mem)
-            + waysToClimbStairs(n-1, mem);
-            return mem[n];
-        }
     }
     public static void printMatrix(boolean[][] matrix) {
         for(int i=0; i<matrix.length; i++) {
