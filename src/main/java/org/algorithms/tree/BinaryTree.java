@@ -5,8 +5,45 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import org.datastructures.BinaryTreeNode;
+
 public class BinaryTree {
-    static class Node{
+
+    public static boolean checkBalancedTree(BinaryTreeNode node) {
+        int leftDepth = getLeftNodeDepth(node.left);
+        System.out.println("left Depth"+ leftDepth);
+        int rightDepth = getRightNodeDepth(node.right);
+        System.out.println("right depth"+rightDepth);
+        int maxDepth = Math.max(leftDepth, rightDepth);
+        int minDepth = Math.min(leftDepth, rightDepth);
+        if(maxDepth - minDepth > 1)  return false; else return true;
+    }
+
+    private static int getLeftNodeDepth(BinaryTreeNode node) {
+        if(node == null) return 0;
+        if(node.left != null)
+            return 1 + getLeftNodeDepth(node.left);
+        else return 1;
+    }
+
+    private static int getRightNodeDepth(BinaryTreeNode node) {
+        if(node == null) return 0;
+        if(node.right != null)
+            return 1 + getLeftNodeDepth(node.right);
+        else return 1;
+    }
+
+    public static void main(String[] args) {
+        BinaryTreeNode bt = new BinaryTreeNode(1);
+        BinaryTreeNode left = bt.insertLeft(2);
+        left.insertLeft(4);
+        left.insertRight(5).insertRight(6);
+        bt.insertRight(3);
+        System.out.println(checkBalancedTree(bt));
+
+    }
+
+    /*static class Node{
         int data;
         Node left,right;
         Node(int data) {this.data = data;}
@@ -101,8 +138,9 @@ public class BinaryTree {
             list.forEach(num -> System.out.printf("%d ", num));
             System.out.println();
         }*/
-        System.out.println(isSubTree(new Node(3, new Node(4, new Node(1), new Node(2)), new Node(5)),
+        
+        /*System.out.println(isSubTree(new Node(3, new Node(4, new Node(1), new Node(2)), new Node(5)),
         new Node(4, new Node(1), new Node(2))));
 
-    }
+    }*/
 }

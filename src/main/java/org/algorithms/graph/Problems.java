@@ -5,13 +5,38 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
+import org.datastructures.AdjacencyMatrix;
+
 public class Problems {
+    
+    public static List<Integer> traverseGraphWithBFS(int root, AdjacencyMatrix am) {
+        Queue<Integer> queue = new LinkedList<>();
+        LinkedList<Integer> result = new LinkedList<>();
+        boolean[] visited = new boolean[am.nodes.size()];
+        queue.offer(root);
+        result.add(root);
+        visited[root] = true;
+        while(!queue.isEmpty()) {
+            Integer node = queue.poll();
+            List<Integer> list = am.nodes.get(node);
+            for(Integer i : list) {
+                if(!visited[i]) {
+                    result.add(i);
+                    queue.offer(i);
+                    visited[i] = true;
+                }
+            }
+        }
+        return result;
+    }
+
+
     /*
      * Traverse given graph using Breadth First Search
      * Input: Graph and root node
      * Output: List of nodes traversed
      */
-    public static List<Integer> breadthFirstSearchTraversal(Graph graph, int root) {
+    /*public static List<Integer> breadthFirstSearchTraversal(Graph graph, int root) {
         Queue<Integer> queue = new LinkedList<>();
         LinkedList<Integer> result = new LinkedList<>();
         boolean[] vertices = new boolean[graph.list.size()];
@@ -30,7 +55,7 @@ public class Problems {
             }
         }
         return result;
-    }
+    }*/
 
     /*
      * Traverse given graph using Depth First Search
