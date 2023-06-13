@@ -3,6 +3,9 @@ package org.algorithms;
 import java.util.List;
 
 public class Utils {
+    public static String repeat(String text, int count) {
+        return "";
+    }
     public static boolean compareListsWithOrder(List<Integer> list1, List<Integer> list2) {
         if(list1 == null || list2 == null) return false;
         if(list1.size() != list2.size()) return false;

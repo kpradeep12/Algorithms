@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
-import org.datastructures.AdjacencyMatrix;
-
-public class Problems {
+public class Graph_Problems {
     
     /*
      * Traverse given graph using Breadth First Search
@@ -69,7 +67,7 @@ public class Problems {
      * Input: Graph, start and end node
      * Output: boolean if connected, else false
      */
-    public static boolean isRouteAvailable(Graph graph, int start, int end) {
+    /*public static boolean isRouteAvailable(Graph graph, int start, int end) {
         Queue<Integer> queue = new LinkedList<>();
         boolean[] visited = new boolean[graph.list.size()];
         queue.add(start);
@@ -84,6 +82,6 @@ public class Problems {
             }
         }
         return false;
-    }
+    }*/
 
 }

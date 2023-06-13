@@ -1,0 +1,144 @@
+package org.algorithms.tree;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class BinaryTree {
+
+    public static boolean checkBalancedTree(BinaryTreeNode node) {
+        int leftDepth = getLeftNodeDepth(node.left);
+        System.out.println("left Depth"+ leftDepth);
+        int rightDepth = getRightNodeDepth(node.right);
+        System.out.println("right depth"+rightDepth);
+        int maxDepth = Math.max(leftDepth, rightDepth);
+        int minDepth = Math.min(leftDepth, rightDepth);
+        if(maxDepth - minDepth > 1)  return false; else return true;
+    }
+
+    private static int getLeftNodeDepth(BinaryTreeNode node) {
+        if(node == null) return 0;
+        if(node.left != null)
+            return 1 + getLeftNodeDepth(node.left);
+        else return 1;
+    }
+
+    private static int getRightNodeDepth(BinaryTreeNode node) {
+        if(node == null) return 0;
+        if(node.right != null)
+            return 1 + getLeftNodeDepth(node.right);
+        else return 1;
+    }
+
+    public static void main(String[] args) {
+        BinaryTreeNode bt = new BinaryTreeNode(1);
+        BinaryTreeNode left = bt.insertLeft(2);
+        left.insertLeft(4);
+        left.insertRight(5).insertRight(6);
+        bt.insertRight(3);
+        System.out.println(checkBalancedTree(bt));
+
+    }
+
+    /*static class Node{
+        int data;
+        Node left,right;
+        Node(int data) {this.data = data;}
+        Node(int data, Node left, Node right) {this.data = data; this.left=left; this.right=right; }
+    }
+    public static void preOrder(Node n) {
+        if(n == null) return;
+        preOrder(n.left);
+        System.out.printf(" %d ",n.data);
+        preOrder(n.right);
+    }
+    
+    public static int maxDepth(Node node) {
+        if(node == null) return 0;
+        int leftDepth = maxDepth(node.left);
+        int rightDepth = maxDepth(node.right);
+        int bigger = Math.max(leftDepth, rightDepth);
+        return bigger+1;
+    }
+
+    public static boolean checkEqualTrees(Node n1, Node n2) {
+        if(n1==null && n2==null) return true;
+        if(n1.data != n2.data || n1==null || n2==null) return false;
+       // boolean result = (checkEqualTrees(n1.left, n2.left) && checkEqualTrees(n1.right, n2.right));
+        //if(result && n1.data == n2.data) return true; else return false;
+       return  (checkEqualTrees(n1.left, n2.left) && checkEqualTrees(n1.right, n2.right));
+    }
+
+    public static void invertTree(Node node) {
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(node);
+        while(!queue.isEmpty()) {
+            Node n = queue.poll();
+            if(n.left != null) queue.add(n.left);
+            if(n.right != null) queue.add(n.right);
+            Node temp = n.left;
+            n.left = n.right;
+            n.right = temp;            
+        }
+    }
+
+    public static ArrayList<ArrayList<Integer>> levelOrder(Node node) {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        ArrayList<Integer> values = new ArrayList<>();
+        Queue<Node> current = new LinkedList<>();
+        Queue<Node> nextLevel = new LinkedList<>();
+        current.add(node);
+        while(!current.isEmpty()) {
+            Node n = current.poll();
+            if(n.left!=null) nextLevel.add(n.left);
+            if(n.right!=null) nextLevel.add(n.right);
+            values.add(n.data);
+            if(current.isEmpty()){
+                current = nextLevel;
+                nextLevel = new LinkedList<>();
+                result.add(values);
+                values = new ArrayList<>();
+            }
+        }
+        return result;
+    }
+    
+    public static boolean isSubTree(Node root, Node subRoot) {
+        if(root == null) return false;
+        if(isSubTreeHelper(root, subRoot)) return true;
+        return isSubTree(root.left, subRoot) || isSubTree(root.right, subRoot);
+    }
+    public static boolean isSubTreeHelper(Node root, Node subRoot) {
+        if(root == null && subRoot == null) return true;
+        if(root == null || subRoot == null) return false;
+        if(root.data != subRoot.data) return false;
+        return (isSubTreeHelper(root.left, subRoot.left) && isSubTreeHelper(root.right, subRoot.right));
+    }
+    public static void main(String[] args) {
+        //Node node = new Node(3, new Node(9), 
+        //new Node(20, new Node(15), new Node(7)));
+        //System.out.println(maxDepth(node));
+
+        //Node n1 = new Node(1, new Node(2), new Node(1));
+        //Node n2 = new Node(1, new Node(2), new Node(1));
+        //System.out.println(checkEqualTrees(n1, n2));
+
+        /*Node n = new Node(1, new Node(2), new Node(3));
+        preOrder(n);
+        invertTree(n);
+        System.out.println();
+        preOrder(n);*/
+
+        /*Node n = new Node(3, new Node(9), new Node(20, new Node(15), new Node(7)));
+        ArrayList<ArrayList<Integer>> result = levelOrder(n);
+        for(ArrayList<Integer> list: result) {
+            list.forEach(num -> System.out.printf("%d ", num));
+            System.out.println();
+        }*/
+        
+        /*System.out.println(isSubTree(new Node(3, new Node(4, new Node(1), new Node(2)), new Node(5)),
+        new Node(4, new Node(1), new Node(2))));
+
+    }*/
+}

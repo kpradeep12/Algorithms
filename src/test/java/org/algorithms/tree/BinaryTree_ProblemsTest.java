@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.algorithms.Utils;
-import org.datastructures.BinaryTreeNode;
 import org.junit.jupiter.api.Test;
 
 public class BinaryTree_ProblemsTest {

@@ -2,8 +2,7 @@
 
 ## Data structure
 
-[org.datastructures.BinaryTreeNode.java](../../datastructures/BinaryTreeNode.java)
-
+[org.datastructures.BinaryTreeNode.java](BinaryTreeNode.java)
 ## Algorithms
 
 Tree algorithms are available in [org.algorithms.tree.BinaryTree_Problems.java](BinaryTree_Problems.java)

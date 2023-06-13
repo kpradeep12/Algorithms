@@ -1,4 +1,4 @@
-package org.datastructures;
+package org.algorithms.tree;
 
 public class BinaryTreeNode {
     public int value;

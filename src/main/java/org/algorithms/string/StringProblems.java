@@ -1,4 +1,4 @@
-package org.algorithms;
+package org.algorithms.string;
 
 import java.util.Arrays;
 import java.util.HashMap;

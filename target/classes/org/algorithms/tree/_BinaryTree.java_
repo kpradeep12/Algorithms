@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import org.datastructures.BinaryTreeNode;
-
 public class BinaryTree {
 
     public static boolean checkBalancedTree(BinaryTreeNode node) {

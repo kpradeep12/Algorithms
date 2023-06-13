@@ -1,8 +1,9 @@
-package org.datastructures;
+package org.algorithms.graph;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.algorithms.graph.AdjacencyMatrix;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

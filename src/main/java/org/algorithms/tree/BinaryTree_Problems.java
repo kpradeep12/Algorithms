@@ -2,8 +2,6 @@ package org.algorithms.tree;
 
 import java.util.List;
 
-import org.datastructures.BinaryTreeNode;
-
 public class BinaryTree_Problems {
     
     //Problem 1
