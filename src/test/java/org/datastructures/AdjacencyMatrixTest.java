@@ -35,9 +35,11 @@ public class AdjacencyMatrixTest {
         .edge(3, 1).edge(3, 4)
         .edge(4, 0).edge(4, 1).edge(4, 3);
         ArrayList<List<Integer>> list2 = new ArrayList<>();
-        list2.addAll(List.of(1,4), List.of(0,2,3,4), List.of(1), List.of(1,4),
-        List.of(0,1,3));
-        Arrays.
+        list2.add(List.of(1,4));
+        list2.add(List.of(0,2,3,4));
+        list2.add(List.of(1));
+        list2.add(List.of(1,4));
+        list2.add(List.of(0,1,3));
         Assertions.assertTrue(am2.equals(list2));
     }
 

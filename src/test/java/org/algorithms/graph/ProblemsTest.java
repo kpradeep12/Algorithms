@@ -31,6 +31,18 @@ public class ProblemsTest {
     }
 
     @Test
+    void testTraverseGraphWithDFS() {
+        AdjacencyMatrix am = new AdjacencyMatrix(10, false);
+        am.addEdge(0, 1);am.addEdge(0, 2);am.addEdge(0, 3);
+        am.addEdge(1, 4);am.addEdge(2, 5);am.addEdge(2, 6);
+        am.addEdge(3, 7);
+        am.addEdge(4, 8);am.addEdge(5, 9);
+        List<Integer> result = Problems.traverseGraphWithDFS(0, am);
+        result.forEach(System.out::println);
+        assertTrue(Utils.compareListsWithOrder(result, List.of(0,3,7,2,6,5,9,1,4,8)));
+    }
+
+    @Test
     public void testDirectedGraphWithBreadthFirstSearchTraversal() {
         AdjacencyMatrix am = new AdjacencyMatrix(10, true);
         am.addEdge(0, 1);am.addEdge(0, 2);am.addEdge(0, 3);
@@ -41,7 +53,7 @@ public class ProblemsTest {
         assertTrue(Utils.compareListsWithOrder(result, List.of(0,1,2,3,4,5,6,7,8,9)));
     }
 
-    @Test
+    /*@Test
     public void testDepthFirstSearchTraversal() {
         Graph g1 = new Graph(10, false);
         g1.addNode(0, 1); g1.addNode(0, 2); g1.addNode(0, 3);
@@ -49,7 +61,7 @@ public class ProblemsTest {
         g1.addNode(4, 8);g1.addNode(5, 9);
         List<Integer> result = Problems.depthFirstSearchTraversal(g1, 0);
         assertTrue(Utils.compareListsWithOrder(result, List.of(0,3,7,2,6,5,9,1,4,8)));
-    }
+    }*/
 
     @Test
     public void testIsRouteAvailable() {
@@ -60,4 +72,6 @@ public class ProblemsTest {
         assertTrue(Problems.isRouteAvailable(g1, 0, 3));
         assertFalse(Problems.isRouteAvailable(g1, 4, 3));
     }
+
+    
 }

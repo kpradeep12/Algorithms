@@ -9,79 +9,60 @@ import org.datastructures.AdjacencyMatrix;
 
 public class Problems {
     
-    public static List<Integer> traverseGraphWithBFS(int root, AdjacencyMatrix am) {
-        Queue<Integer> queue = new LinkedList<>();
-        LinkedList<Integer> result = new LinkedList<>();
-        boolean[] visited = new boolean[am.nodes.size()];
-        queue.offer(root);
-        result.add(root);
-        visited[root] = true;
-        while(!queue.isEmpty()) {
-            Integer node = queue.poll();
-            List<Integer> list = am.nodes.get(node);
-            for(Integer i : list) {
-                if(!visited[i]) {
-                    result.add(i);
-                    queue.offer(i);
-                    visited[i] = true;
-                }
-            }
-        }
-        return result;
-    }
-
-
     /*
      * Traverse given graph using Breadth First Search
      * Input: Graph and root node
      * Output: List of nodes traversed
      */
-    /*public static List<Integer> breadthFirstSearchTraversal(Graph graph, int root) {
+    public static List<Integer> traverseGraphWithBFS(int root, AdjacencyMatrix am) {
         Queue<Integer> queue = new LinkedList<>();
         LinkedList<Integer> result = new LinkedList<>();
-        boolean[] vertices = new boolean[graph.list.size()];
+        boolean[] visited = new boolean[am.nodes.size()];
         queue.offer(root);
-        result.add(root);
-        vertices[root] = true;
         while(!queue.isEmpty()) {
-            LinkedList<Integer> list = graph.list.get(queue.poll());
-            for(int i=0; i<list.size(); i++) {
-                Integer node = list.get(i);
-                if(vertices[node] == false) {
-                    queue.offer(node);
-                    vertices[node] = true;
-                    result.add(node);
-                }
-            }
-        }
-        return result;
-    }*/
-
-    /*
-     * Traverse given graph using Depth First Search
-     * Input: Graph and root node
-     * Output: List of nodes traversed
-     */
-    public static List<Integer> depthFirstSearchTraversal(Graph graph, int root) {
-        Stack<Integer> stack = new Stack<>();
-        List<Integer> result = new LinkedList<>();
-        boolean[] visited = new boolean[graph.list.size()];
-        stack.add(root);
-        while(!stack.isEmpty()) {
-            Integer node = stack.pop();
+            Integer node = queue.poll();
             if(!visited[node]) {
                 visited[node] = true;
                 result.add(node);
-                List<Integer> list = graph.list.get(node);
-                for(Integer num: list) {
-                    if(!visited[num]) {
-                        stack.push(num);
+                List<Integer> list = am.nodes.get(node);
+                for(Integer i : list) {
+                    if(!visited[i]) {
+                        queue.offer(i);
                     }
                 }
             }
         }
         return result;
     }
+
+    /*
+     * Traverse given graph using Depth First Search
+     * Input: Graph and root node
+     * Output: List of nodes traversed
+     */
+    public static List<Integer> traverseGraphWithDFS(int root, AdjacencyMatrix am) {
+        Stack<Integer> stack = new Stack<>();
+        LinkedList<Integer> result = new LinkedList<>();
+        boolean[] visited = new boolean[am.nodes.size()];
+        stack.push(root);
+        while(!stack.isEmpty()) {
+            Integer node = stack.pop();
+            if(!visited[node]) {
+                visited[node] = true;
+                result.add(node);
+                List<Integer> list = am.nodes.get(node);
+                for(Integer i : list) {
+                    if(!visited[i]) {
+                        stack.push(i);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    
+    
 
     /*
      * Check if given start and end nodes are connected in the given directed graph
