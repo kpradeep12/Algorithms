@@ -59,6 +59,20 @@ public class Graph_Problems {
         return result;
     }
 
+    public static List<Integer> traveseGraphWithDFSRecursive(int root, AdjacencyMatrix am) {
+        List<Integer> result = new LinkedList<>();
+        dfsResurive(root, am, result, new boolean[am.nodes.size()]);
+        return result;
+    }
+    private static void dfsResurive(int node, AdjacencyMatrix am, List<Integer> result, boolean[] visited) {
+        if(!visited[node]) {
+            visited[node] = true;
+            result.add(node);
+            for(Integer i: am.nodes.get(node)) {
+                dfsResurive(i, am, result, visited);
+            }
+        }
+    }
     
     
 

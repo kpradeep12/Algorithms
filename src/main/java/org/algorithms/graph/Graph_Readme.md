@@ -18,6 +18,13 @@ class AdjacencyMatrix {
             |/      |
             4 ----- 3      
 
+**Graph 2**
+
+                    0
+                    |
+                    2 
+                                
+                   
 ## Algorithms
 
 Graph problems are available in [org.algorithms.graph.Graph_Problems.java](Graph_Problems.java)

@@ -9,6 +9,16 @@ import org.algorithms.*;
 import org.junit.jupiter.api.Test;
 
 public class ProblemsTest {
+    private AdjacencyMatrix getGraph1() {
+        AdjacencyMatrix am = new AdjacencyMatrix(5, false);
+        am.addEdge(0, 1);am.addEdge(0, 4);
+        am.addEdge(1, 0);am.addEdge(1, 2);am.addEdge(1, 4);am.addEdge(1, 3);
+        am.addEdge(2, 1);
+        am.addEdge(3, 1);am.addEdge(3, 4);
+        am.addEdge(4, 0);am.addEdge(4, 1);am.addEdge(4, 3);
+        return am;
+    }
+    
     @Test
     public void testBreadthFirstSearchTraversal() {
         AdjacencyMatrix am = new AdjacencyMatrix(10, false);
@@ -50,6 +60,12 @@ public class ProblemsTest {
         am.addEdge(4, 8);am.addEdge(5, 9);
         List<Integer> result = Graph_Problems.traverseGraphWithBFS(0, am);
         assertTrue(Utils.compareListsWithOrder(result, List.of(0,1,2,3,4,5,6,7,8,9)));
+    }
+
+    @Test
+    void testTraverseGraphWithDFSRecursive() {
+        List<Integer> result = Graph_Problems.traveseGraphWithDFSRecursive(0, getGraph1());
+        assertTrue(Utils.compareListsWithOrder(result, List.of(0,1,2,4,3)));
     }
 
     /*@Test
