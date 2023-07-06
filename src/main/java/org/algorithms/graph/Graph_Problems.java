@@ -83,7 +83,7 @@ public class Graph_Problems {
             this.depth = depth;
         }
     }
-    public static boolean isBalancedTree(BinaryTreeNode root) {
+    /*public static boolean isBalancedTree(BinaryTreeNode root) {
         if(root == null) return true;
         Queue<NodeDepthPair> queue = new LinkedList<>();
         queue.offer(new NodeDepthPair(root, 0));
@@ -100,7 +100,7 @@ public class Graph_Problems {
                     queue.offer(new NodeDepthPair(node.right, depth+1));
             }
         }
-    }
+    }*/
 
     /*
      * Check if given start and end nodes are connected in the given directed graph
