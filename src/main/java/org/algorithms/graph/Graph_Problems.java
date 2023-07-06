@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
+import org.algorithms.tree.BinaryTreeNode;
+
 public class Graph_Problems {
     
     /*
@@ -74,7 +76,31 @@ public class Graph_Problems {
         }
     }
     
-    
+    static class NodeDepthPair {
+        BinaryTreeNode node; int depth;
+        NodeDepthPair(BinaryTreeNode node, int depth) {
+            this.node = node;
+            this.depth = depth;
+        }
+    }
+    public static boolean isBalancedTree(BinaryTreeNode root) {
+        if(root == null) return true;
+        Queue<NodeDepthPair> queue = new LinkedList<>();
+        queue.offer(new NodeDepthPair(root, 0));
+        while(!queue.isEmpty()) {
+            NodeDepthPair pair = queue.poll();
+            BinaryTreeNode node = pair.node;
+            int depth = pair.depth;
+            if(node.left == null && node.right == null) {
+
+            }else {
+                if(node.left != null)
+                    queue.offer(new NodeDepthPair(node.left, depth+1));
+                if(node.right != null)
+                    queue.offer(new NodeDepthPair(node.right, depth+1));
+            }
+        }
+    }
 
     /*
      * Check if given start and end nodes are connected in the given directed graph

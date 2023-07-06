@@ -35,8 +35,26 @@ Graph problems are available in [org.algorithms.graph.Graph_Problems.java](Graph
 
 ### 1. Breadth First Search Traversal
 ```
-Traverse the left node (node.left)  
-Visit the node  
-Traverse the right node (node.right)
+
 ```
-If we perform **In Order traversal** operation on **Tree 1**, then we get output as: 1,7,3,6,11,2,5,4,9
+
+### 2 Depth First Search - Iterative
+
+### 3 Depth First Search - Recursive
+
+### 4 Balanced Binary Tree
+Writh a method to see if a Binary tree is 'superbalanced'
+
+> A tree is superbalanced, if the differences between the depths of any two leaf nodes is no greater than one.
+
+Balanced Tree           Unbalanced Tree 
+
+         0                   0             
+        / \                 / \
+       1   2               1   2
+      / \                 / \
+     3   4               3   4
+                            /
+                           5
+
+sdfsd
