@@ -21,6 +21,7 @@ public class ArrayProblems {
         }
         return null;
     }
+    
     /*public static int[] twoSumsWithLoops(int[] input, int total) {
         int[] result = new int[2];
         for(int i=0; i<input.length; i++) {
