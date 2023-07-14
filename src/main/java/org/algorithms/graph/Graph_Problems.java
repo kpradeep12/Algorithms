@@ -16,22 +16,21 @@ public class Graph_Problems {
      */
     public static List<Integer> traverseGraphWithBFS(int root, AdjacencyMatrix am) {
         Queue<Integer> queue = new LinkedList<>();
-        LinkedList<Integer> result = new LinkedList<>();
+        List<Integer> result = new LinkedList<>();
         boolean[] visited = new boolean[am.nodes.size()];
-        queue.offer(root);
+        queue.add(root);
+
         while(!queue.isEmpty()) {
             Integer node = queue.poll();
             if(!visited[node]) {
                 visited[node] = true;
                 result.add(node);
-                List<Integer> list = am.nodes.get(node);
-                for(Integer i : list) {
-                    if(!visited[i]) {
-                        queue.offer(i);
-                    }
+                for(Integer n: am.nodes.get(node)) {
+                    if(!visited[n]) queue.add(n);
                 }
             }
         }
+
         return result;
     }
 
