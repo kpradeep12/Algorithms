@@ -9,7 +9,19 @@ import java.util.Map;
 import java.util.Set;
 
 public class ArrayProblems {
-    public static int[] twoSumsWithLoops(int[] input, int total) {
+    public static int[] twoSum(int[] arr, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int i=0; i<arr.length; i++) {
+            if(map.get(target - arr[i]) != null) {
+                int a = map.get(target - arr[i]);
+                int b = i;
+                return new int[] {a, b};
+            }
+            map.put(arr[i], i);
+        }
+        return null;
+    }
+    /*public static int[] twoSumsWithLoops(int[] input, int total) {
         int[] result = new int[2];
         for(int i=0; i<input.length; i++) {
             for(int j=0; j<input.length; j++) {
@@ -30,7 +42,7 @@ public class ArrayProblems {
             }else map.put(input[i], i);
         }
         return new int[]{};
-    }
+    }*/
     public static int bestTimeToBuy(int[] input) {
         int result = 0;
         int min = input[0];
