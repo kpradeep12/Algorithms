@@ -21,29 +21,6 @@ public class ArrayProblems {
         }
         return null;
     }
-    
-    /*public static int[] twoSumsWithLoops(int[] input, int total) {
-        int[] result = new int[2];
-        for(int i=0; i<input.length; i++) {
-            for(int j=0; j<input.length; j++) {
-                if(i!=j && (input[i] + input[j] == total)) {
-                    result[0]=i; result[1]=j;
-                    return result;
-                }
-            }
-        }
-        return result;
-    }
-    public static int[] twoSumsWithMap(int[] input, int total) {
-        Map<Integer, Integer> map = new HashMap<>();
-        for(int i=0; i<input.length; i++) {
-            int complement = total - input[i];
-            if(map.containsKey(complement)) {
-                return new int[] {map.get(complement), i};
-            }else map.put(input[i], i);
-        }
-        return new int[]{};
-    }*/
     public static int bestTimeToBuy(int[] input) {
         int result = 0;
         int min = input[0];
