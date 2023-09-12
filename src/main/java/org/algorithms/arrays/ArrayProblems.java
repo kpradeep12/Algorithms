@@ -71,6 +71,7 @@ public class ArrayProblems {
         }
         return maxVolume;
     }
+    //threeSum(new int[]{-1,0,1,2,-1,-4}, 0);
     public static List<Integer[]> threeSum(int[] arr, int target) {
         List<Integer[]> list = new ArrayList<>();
         for(int i=0; i<arr.length-2; i++) {
@@ -106,7 +107,28 @@ public class ArrayProblems {
         }
         return result;
     }
+    public static void rotate(int[] nums, int k) {
+        k = k % nums.length;
+        int count = 0;
+        for (int start = 0; count < nums.length; start++) {
+          int current = start;
+          int prev = nums[start];
+            do {
+                int next = (current + k) % nums.length;
+                int temp = nums[next];
+                nums[next] = prev;
+                prev = temp;
+                current = next;
+                count++;
+            } while (start != current);
+        }
+      }
+
     public static void main(String[] args) {
+        int[] array = new int[] {1,2,3,4,5,6};
+        System.out.println(Arrays.toString(array));
+        ArrayProblems.rotate(array, 12);
+        System.out.println(Arrays.toString(array));
         //System.out.println(Arrays.toString(ArrayProblems.twoSumsWithMap(new int[]{11,8,3,2,15,7,10}, 9)));
         //System.out.println(bestTimeToBuy(new int[]{7,6,4,3,1}));
         //System.out.println(containsDuplicate(new int[]{1,2,3,4,3}));
@@ -121,7 +143,7 @@ public class ArrayProblems {
         }*/
         //System.out.println(minimumInRotatedArray(new int[]{7,8,1,2,3,4,5,6}, 0, 7));
         //System.out.println(maxProdSubArray(new int[]{1,-2, -3, 0, 7, -8, -2}));
-        int x = -12;   
-        System.out.println("x<<1 = " + (x << 1)); 
+        //int x = -12;   
+        //System.out.println("x<<1 = " + (x << 1)); 
     }
 }
